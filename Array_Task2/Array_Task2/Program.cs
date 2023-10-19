@@ -10,38 +10,45 @@ namespace Array_Task2
     {
         static void Main(string[] args)
         {
-            Random _rnd = new Random();
-
-            Console.WriteLine("Введите количество элементов");
+            Console.Write("Введите количество элементов");
             int N = Convert.ToInt32(Console.ReadLine());
-            int[] array = new int[N];
-
-
-            for (int i = 0; i < N; i++)
+            int[] array = InitializeArray(N);
+            Console.WriteLine("Изначальный массив:");
+            PrintArray(array);
+            Console.WriteLine();
+            SortArray(array, N);
+            Console.WriteLine("Измененный массив:");
+            PrintArray(array);
+            Console.ReadLine();
+        }
+        static int[] InitializeArray(int n)
+        {
+            Random random = new Random();
+            int[] array = new int[n];
+            for (int i = 0; i < array.Length; i++)
             {
-                array[i] =_rnd.Next(0,101);
+                array[i] = random.Next(1, 101);
             }
 
-            Console.WriteLine("Изначальный массив:");
-            for (int i = 0; i < N; i++)
+            return array;
+        }
+        static void PrintArray(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
             {
                 Console.Write($"{array[i]} ");
             }
-            Console.WriteLine();
-            for (int i = 0; i < N / 2; i++)
+        }
+        static int[] SortArray(int[] array, int n)
+        {
+            for (int i = 0; i < n / 2; i++)
             {
                 int last = array[i];
-                array[i] = array[i + N / 2];
-                array[i + N / 2] = last;
+                array[i] = array[i + n / 2];
+                array[i + n / 2] = last;
             }
 
-            Console.WriteLine("Измененный массив:");
-            for (int i = 0; i < N; i++)
-            {
-                Console.Write($"{array[i]} ");
-            }
-
-            Console.ReadLine();
+            return array;
         }
     }
 }
